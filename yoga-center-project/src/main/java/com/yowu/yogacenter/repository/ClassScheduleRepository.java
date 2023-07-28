@@ -90,6 +90,30 @@ public class ClassScheduleRepository {
         return list;
     }
     
+    public List<ClassSchedule> getScheduleByAccount(int accountId) {
+        String sql = "select * from tblClassSchedule join tblRegistrationCourse on tblClassSchedule.registration_id = tblRegistrationCourse.registration_id where account_id=?";
+        List<ClassSchedule> list = new ArrayList<>();
+        try ( PreparedStatement stmt = DBHelpler.makeConnection().prepareStatement(sql)) {
+            stmt.setInt(1, accountId);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    RegistrationCourseRepository cr = new RegistrationCourseRepository();
+                    ClassSchedule c = new ClassSchedule();
+                    c.setId(rs.getInt("class_schedule_id"));
+                    c.setRegistrationCourse(cr.detail(rs.getInt("registration_id")));
+                    c.setDate(rs.getDate("class_date"));
+                    c.setStartTime(rs.getTime("slot_start_time"));
+                    c.setEndTime(rs.getTime("slot_end_time"));
+                    c.setStatus(rs.getInt("class_status"));
+                    list.add(c);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public List<Time> getTimeScheduleBetweenDateByAccount(Date startDate,Date endDate, int accountId){
         String sql = "select cs.slot_start_time from (select slot_start_time, registration_id from tblClassSchedule where class_date between ? and ?) cs join (select registration_id from tblRegistrationCourse where account_id=? ) rc on cs.registration_id=rc.registration_id group by slot_start_time order by slot_start_time asc ";
         List<Time> list = new ArrayList<>();
@@ -169,7 +193,7 @@ public class ClassScheduleRepository {
 
         return status == 1;
     }
-    
+
     public boolean update2(ClassSchedule classSchedule) {
         String sql = "UPDATE tblClassSchedule SET class_date = ?, slot_start_time = ?, slot_end_time = ?, class_status = ? WHERE class_schedule_id = ?";
         int status = 0;
@@ -203,11 +227,10 @@ public class ClassScheduleRepository {
 
         return status == 1;
     }
+    
     public static void main(String[] args) {
         ClassScheduleRepository csr = new ClassScheduleRepository();
-        Date d = Date.valueOf(LocalDate.of(2023, Month.JUNE, 5));
-        Date d2 = Date.valueOf(LocalDate.of(2023, Month.JUNE, 9));
-        System.out.println(csr.getTimeScheduleBetweenDateByAccount(d, d2, 2).get(0).toString());
+        System.out.println(csr.getScheduleByAccount(54));
     }
     
     public List<ClassSchedule> searchClassScheduleByRegistrationID(Date search) {
@@ -234,4 +257,45 @@ public class ClassScheduleRepository {
         }
         return list;
     }
+
+    public List<ClassSchedule> pagingClassSchedule(int offset, int next) {
+        String sql = "select * from tblClassSchedule order by class_schedule_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
+        List<ClassSchedule> list = new ArrayList<>();
+        try ( PreparedStatement stmt = DBHelpler.makeConnection().prepareStatement(sql)) {
+            stmt.setInt(1, offset);
+            stmt.setInt(2, next);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    RegistrationCourseRepository cr = new RegistrationCourseRepository();
+                    ClassSchedule c = new ClassSchedule();
+                    c.setId(rs.getInt("class_schedule_id"));
+                    c.setRegistrationCourse(cr.detail(rs.getInt("registration_id")));
+                    c.setDate(rs.getDate("class_date"));
+                    c.setStartTime(rs.getTime("slot_start_time"));
+                    c.setEndTime(rs.getTime("slot_end_time"));
+                    c.setStatus(rs.getInt("class_status"));
+                    list.add(c);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public int count() {
+        String sql = "select count(*) as num from tblClassSchedule ";
+        int count = 0;
+        try ( PreparedStatement stmt = DBHelpler.makeConnection().prepareStatement(sql)) {
+            try ( ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt("num");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
+    }
+
 }

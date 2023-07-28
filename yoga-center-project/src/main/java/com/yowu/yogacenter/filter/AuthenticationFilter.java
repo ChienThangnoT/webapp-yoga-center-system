@@ -5,6 +5,7 @@
 package com.yowu.yogacenter.filter;
 
 import com.yowu.yogacenter.model.Account;
+import com.yowu.yogacenter.model.Role;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -42,7 +43,10 @@ public class AuthenticationFilter implements Filter {
             urlQuery += '?'+queryString;
         }
         //System.out.println(urlName);
-        if(urlName.endsWith(".jsp")){
+        int ADMIN = Role.RoleList.ADMIN.ordinal();
+        int TRAINEE = Role.RoleList.TRAINEE.ordinal();
+        int CASHIER = Role.RoleList.CASHER.ordinal();
+        if(urlName.endsWith(".jsp") && urlName.contains("forgetPassword.jsp") && urlName.contains("TermOfService.jsp")){
             res.sendRedirect(contextPath+"/home");
         }else{
             switch(urlName){
@@ -55,7 +59,14 @@ public class AuthenticationFilter implements Filter {
                 case "/Checkout":
                 case "/CheckoutResult":{
                     if(acc!=null){
-                        chain.doFilter(request, response);
+                        if (acc.getRole().getId() == ADMIN) {
+                            res.sendRedirect(contextPath+"/admin/dashboard");
+                        }else if(acc.getRole().getId() == CASHIER){
+                            res.sendRedirect(contextPath+ "/cashier/viewBillCashierController");
+                        } else{
+                             chain.doFilter(request, response);
+                        }
+                       
                     }else{
                         ss.setAttribute("currentPage", urlQuery);
                         res.sendRedirect(contextPath+"/login");
@@ -87,9 +98,25 @@ public class AuthenticationFilter implements Filter {
                 case "/admin/searchMembershipController":
                 case "/admin/searchAccountController":
                 case "/admin/searchBillController":
-                case "/admin/dashboard":{
-                    if(acc!=null && acc.getRole().getId()==3){
-                        chain.doFilter(request, response);
+                case "/admin/dashboard":
+                case "/admin/updateClassScheduleController":
+                case "/admin/deleteClassScheduleController":    
+                case "/admin/addClassScheduleController":
+                case "/admin/searchClassScheduleController":
+                case "/admin/billAnalysisController":
+                case "/admin/blogAnalysisController":
+                case "/admin/viewBillMembershipListController":
+                case "/admin/searchBillMembershipController":
+                case "/admin/blog-approval":
+                {
+                    if(acc!=null){
+                         if (acc.getRole().getId() == TRAINEE) {
+                            res.sendRedirect(contextPath+"/home");
+                        }else if(acc.getRole().getId() == CASHIER){
+                            res.sendRedirect(contextPath+ "/cashier/viewBillCashierController");
+                        } else{
+                             chain.doFilter(request, response);
+                        }
                     }else{
                         ss.setAttribute("currentPage", urlQuery);
                         res.sendRedirect(contextPath+"/login");

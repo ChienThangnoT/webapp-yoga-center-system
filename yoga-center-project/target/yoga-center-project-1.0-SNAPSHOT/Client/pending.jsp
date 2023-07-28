@@ -55,11 +55,11 @@
                                 </tr>
                                 <tr>
                                     <th>Payment method:</td>
-                                        <td>${bill.method}</td>                                  
+                                        <td>${bill.paymentMethod}</td>                                  
                                 </tr>
                                 <tr>
                                     <th>Order code:</th>
-                                    <td>${bill.ordercode}</td>
+                                    <td>${bill.orderCode}</td>
                                 </tr>
                                 <tr>
                                     <th>Amount paid:</th>
@@ -77,13 +77,24 @@
                     <div class="col-md-12 payment-details">
                         <table>
                             <tbody>
-                                <tr>
-                                    <th>Payment product:</th>
+                                <c:if test="${bill.getClass().getName() eq 'com.yowu.yogacenter.model.Bill'}">
+                                    <tr>
+                                        <th>Payment product:</th>
                                         <td>${bill.course.title}</td>
-                                </tr>
-                                    <th>Payment date:</td>
-                                    <td>${bill.date}</td>
-                                </tr>
+                                    </tr>
+                                        <th>Payment date:</td>
+                                        <td>${bill.date}</td>
+                                    </tr>
+                                </c:if>
+                                <c:if test="${bill.getClass().getName() eq 'com.yowu.yogacenter.model.BillMembership'}">
+                                    <tr>
+                                        <th>Payment product:</th>
+                                        <td>Yowu Member level: ${bill.membership.name}</td>
+                                    </tr>
+                                        <th>Payment date:</td>
+                                        <td>${bill.date}</td>
+                                    </tr>
+                                </c:if>
                             </tbody>
                         </table>
                         <div class="thanks">
@@ -93,7 +104,7 @@
                         </div>
                         <div class="payment-footer">
                             <div>Go to Home page after <span id="counter">30</span>s</div>
-                            <p>Powered by <a href="#">VNPAY</a></p>
+                            <p>Powered by <a href="https://vnpay.vn/">VNPAY</a></p>
                         </div>
                     </div>
                 </div>
@@ -101,6 +112,7 @@
         </div>
         <% 
             session.removeAttribute("billCourse");
+            session.removeAttribute("billCourseC");
             session.removeAttribute("PAYMENT");
             session.removeAttribute("RegistrationMembership");
             session.removeAttribute("bill");

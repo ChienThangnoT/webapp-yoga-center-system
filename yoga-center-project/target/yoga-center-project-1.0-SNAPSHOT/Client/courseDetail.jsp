@@ -33,7 +33,7 @@
                 flex-direction: column;
             }
             .banner{
-                padding: 12% 20px 10% 20px;
+                padding: 12% 20px 4% 20px;
                 width: 100%;
                 text-align: center;
                 background: url(${pageContext.request.contextPath}/Asset/img/bg/page-title-1.png) top center / cover no-repeat;
@@ -41,6 +41,10 @@
             .banner h2{
                 color: #227179;
                 font-size: 3.3vw;
+            }
+            .banner p{
+                color: #547670;
+                font-size: 24px;
             }
             .wrapper-container{
                 max-width: 1320px;
@@ -78,14 +82,15 @@
                 display: flex;
                 gap: 16px;
             }
-            .teacher img{
+            .teacher-img{
                 height: 45px;
                 width: 45px;
+                max-width: 45px;
                 border-radius: 50%;
             }
             .yellow-stars{
                 font-size: 12px;
-                color: #fc9d1d;
+                color: #ffc107;
                 line-height: 100%;
             }
             .avg-star{
@@ -178,7 +183,7 @@
                 transform: translateY(-10px);
                 box-shadow: 0 0 25px rgba(0,0,0,0.35);
             }
-            
+
             .surgest-card-img{
                 height: 160px;
                 max-height: 160px;
@@ -187,8 +192,8 @@
                 display: flex;
                 align-items: center;
             }
-                
-            
+
+
             .surgest-card-img img{
                 max-width: 100%;
             }
@@ -255,36 +260,45 @@
             /*feedback*/
             .feedback-area{
                 background-color: #e9ebee4d;
-                padding: 32px 0px;
+                padding: 8px 0px 32px 0px;
             }
             .feedback-area-title{
-                color: #444444;
-                margin-bottom: 32px;
+                color: #545454;
+                font-weight: 600;
                 font-size: 1.4em;
-                padding-left: 24px
+                padding-left: 12px;
+                border-left: 10px solid #227179;
+                line-height: 2.8;
             }
 
             .load-feedback{
                 display: flex;
                 flex-direction: column;
-                gap: 32px;
+                gap: 20px;
             }
 
             .user-feedback-item{
                 display: flex;
                 gap: 16px;
                 padding: 16px 24px;
+                background: #fff;
+                border:1px solid #e6e6e6;
+                border-radius: 10px;
+                margin: 0 20px;
+                transition: all ease-in-out .3s
             }
             .user-feedback-item:hover{
-                background-color: #9f9d9d44;
+                background: #3dbca829;
             }
-
+            .user-feedback-item .yellow-stars{
+                font-size: 16px;
+            }
             .user-feedback-avata{
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
                 border-radius: 50%;
-                border: 1px solid #5e5e5e;
+                border: 2px solid #e6e6e6;
                 align-items: center;
                 max-width: 85px;
                 max-height: 85px;
@@ -304,11 +318,32 @@
                 margin-bottom: 8px;
             }
             .user-feedback-name{
-                font-size: 16px;
-                color: #444444;
+                font-size: 17px;
+                color: #3dbca8;
+                font-weight: 600;
+            }
+            .user-feedback-content{
+                line-height: 1.7;
+                color: #5e5e5e;
+            }
+            .feedback-btn-open{
+                display: inline-block;
+                margin: 20px 20px 0;
+                padding: 10px 24px;
+                background: #fff;
+                border:1px solid #e6e6e6;
+                border-radius: 10px;
+                color: #3dbca8;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all ease-in-out .3s;
+            }
+            .feedback-btn-open:hover{
+                background: #3dbca8;
+                color: white;
             }
 
-            
+
             .text-ellipsis {
                 display: -webkit-box;
                 -webkit-line-clamp: 2; /* Limit the text to 3 lines */
@@ -316,8 +351,146 @@
                 overflow: hidden;
                 text-overflow: ellipsis; /* Add "..." at the end of the third line */
                 white-space: normal;
-             }
-            
+            }
+            .book-btn{
+                text-decoration: none;
+                font-size: 16px;
+                padding: 12px 24px;
+                border: 2px solid #3dbca8;
+                color: #3dbca8;
+                text-transform: uppercase;
+                display: block;
+                text-align: center;
+                transition: all ease-in-out .3s;
+                cursor: pointer;
+                text-align: center;
+            }
+            .book-btn:hover{
+                background-color: #3dbca8;
+                color: white;
+                border-radius: 24px;
+            }
+            .msg-green{
+                padding: 12px 24px;
+                background-color: white;
+                border-radius: 24px;
+                color: #3dbca8;
+                text-transform:capitalize;
+                display: block;
+                font-weight: 600;
+                border: 2px solid #3dbca8;
+                text-align: center;
+            }
+            .msg-yellow{
+                padding: 12px 24px;
+                background-color: white;
+                border-radius: 24px;
+                color: rgb(255, 205, 86);
+                text-transform:capitalize;
+                display: block;
+                font-weight: 600;
+                border: 2px solid rgb(255, 205, 86);
+                text-align: center;
+            }
+
+            /*rating*/
+            .rating-box-wrapper{
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0,0,0,0.35);
+                align-items: center;
+                justify-content: center;
+                display: none;
+                animation: fadein2 ease-in-out .3s;
+            }
+            .rating-box{
+                width: 400px;
+                background-color: #fff;
+                padding: 20px 40px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                border-radius: 10px;
+                position: relative;
+            }
+            .rating-title{
+                font-size: 18px;
+                color: #545454;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+            .rating-star{
+                display: flex;
+                gap: 16px;
+                color: #e6e6e6;
+                cursor: pointer;
+                font-size: 32px;
+                justify-content: space-around;
+            }
+            .rating-note{
+                font-size: 20px;
+                line-height: 1.7;
+                text-align: center;
+                color: #3dbca8;
+            }
+            .star-light{
+                color: #ff9c1a;
+                animation: fadein2 ease-in-out .3s;
+            }
+            .rating-feedback{
+                padding: 15px;
+                height: 59px;
+                border-radius: 5px;
+                outline: none;
+                font-size: 16px;
+                resize: none;
+                max-height: 200px;
+                border-color: #bfbfbf;
+            }
+            .rating-feedback::-webkit-scrollbar{
+                display: none;
+            }
+
+            .rating-box button{
+                padding: 12px 24px;
+                width: fit-content;
+                margin: 0 auto;
+                border: 2px solid #3dbca8;
+                background-color: #3dbca8;
+                border-radius: 12px;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0,0,0,.25);
+                transition: all ease-in-out .3s;
+            }
+            .rating-box button:hover{
+                background-color: #fff;
+                color: #3dbca8;
+            }
+            .rating-close{
+                position: absolute;
+                top:20px;
+                right: 20px;
+                color: #545454;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            .rating-close:hover{
+                color: #e53f4f;
+            }
+
+            @keyframes fadein2{
+                from{
+                    opacity: 0;
+                }
+                to{
+                    opacity: 1;
+                }
+            }
 
             @media screen and (max-width:740px) {
                 .wrapper-container{
@@ -352,18 +525,6 @@
                 }
             }
 
-
-            .book1 a{
-                text-decoration: none;
-                
-            }
-
-            .choose{
-                color: #a4262c
-                
-            }
-            
-
         </style>
 
     </head>
@@ -378,18 +539,18 @@
         </div>
         <div class="wrapper-container">
             <div class="row1">
-                <div onclick='goto("teacher?id=1")'  class="teacher hover-poiter">
-                    <div class="teacher-img">
+                <div onclick='goto("instructor?id=${course.account.id}")'  class="teacher hover-poiter">
+                    <div class="img-square-container teacher-img">
                         <img src="${pageContext.request.contextPath}/Asset/img/avatar/${course.account.img}" alt="#"> <!--replace Teacher img here-->
                     </div>
                     <div>
                         <h4>Teacher</h4>
-                        <a href="#" class="text-style-light-green">${course.account.name}</a> <!--replace teacher name here-->
+                        <a class="text-style-light-green">${course.account.name}</a> <!--replace teacher name here-->
                     </div>
                 </div>
                 <div class="category">
                     <h4>Category</h4>
-                    <a href="#" class="text-style-light-green">${course.category.name}</a> <!--replace category here-->
+                    <a href="course-filter?categoryid=${course.category.id}" class="text-style-light-green">${course.category.name}</a> <!--replace category here-->
                 </div>
                 <div>
                     <h4>Review</h4>
@@ -422,14 +583,15 @@
                         </div>
                     </div>
                     <div class="separate"></div>
-                    <c:if test="${feedbackList!=null && feedbackList.size() gt 0}">
+                    <!<!-- ----------------------------------- Feedback -------------------------------- -->
+                    <c:if test="${feedbackList!=null || allowRating}">
                         <div class="feedback-area">
                             <h2 class="feedback-area-title">Feedback (${feedbackList.size()})</h2>
                             <div class="load-feedback">
                                 <c:forEach items="${feedbackList}" var="feedbackItem">
                                     <c:set var="feedbackAcc" value="${feedbackItem.registrationCourse.account}"/>
                                     <div class="user-feedback-item">
-                                        <div class="user-feedback-avata">
+                                        <div class="user-feedback-avata img-square-container">
                                             <img src="${pageContext.request.contextPath}/Asset/img/avatar/${feedbackAcc.img}" alt="avatar.img">
                                         </div>
                                         <div class="feedback-info">
@@ -450,6 +612,9 @@
                                     </div>
                                 </c:forEach>
                             </div>
+                            <c:if test="${allowRating}">
+                                <span class="feedback-btn-open">Post Your Feedback</span>
+                            </c:if>
                         </div>
                     </c:if>
                 </div>
@@ -479,51 +644,44 @@
                             <c:if test="${course.price<=0}">Free</c:if>
                             </div> <!--replace price here-->
                         </div>
-                        <div  class="course-card book1">
-                        <c:if test="${sessionScope.account == null}">
-                            <c:if test="${course.price>0}">
-                                <a class="book-course" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" class="course-card">
-                                    <p>Purchase2</p>
-                                </a>
-                            </c:if>   
-                            <c:if test="${course.price<=0}">
-                                <a class="book-course" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" class="course-card">
-                                    <p>Errol</p>
-                                </a>
-                            </c:if>
+                    <c:if test="${sessionScope.account == null}">
+                        <c:if test="${course.price>0}">
+                            <a class="book-btn" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" >
+                                Purchase
+                            </a>
+                        </c:if>   
+                        <c:if test="${course.price<=0}">
+                            <a class="book-btn" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" >
+                                Errol
+                            </a>
                         </c:if>
-                            
-                        <c:if test="${sessionScope.account != null && allowBook}">
-                            <c:if test="${course.price>0}">
-                                <a class="book-course" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" class="course-card">
-                                    <p>Purchase1</p>
-                                </a>
-                            </c:if>   
-                            <c:if test="${course.price<=0}">
-                                <a class="book-course" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" class="course-card">
-                                    <p>Errol</p>
-                                </a>
-                            </c:if>
-                            
+                    </c:if>
+
+                    <c:if test="${sessionScope.account != null && allowBook}">
+                        <c:if test="${course.price>0}">
+                            <a class="book-btn" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" >
+                                Purchase
+                            </a>
+                        </c:if>   
+                        <c:if test="${course.price<=0}">
+                            <a class="book-btn" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" >
+                                Errol
+                            </a>
                         </c:if>
 
+                    </c:if>
+                    <c:if test="${sessionScope.account != null  && !allowBook && billStatus ==0}">
+                        <p class="msg-green">You have joined the course</p> 
+                    </c:if>
+                    <c:if test="${sessionScope.account != null  && !allowBook && billStatus == 1}">
+                        <a class="book-btn" onclick="gotoCheckout('Checkout?id=${course.id}&action=course')" >
+                            Purchase
+                        </a>
+                    </c:if>
 
-                        <c:if test="${sessionScope.account != null && !allowBook}">
-                            <c:if test="${course.price>0}">
-                                <a class="book-course" class="course-card">
-                                    <p>You have joined the course</p>
-                                </a>
-                            </c:if>   
-                            <c:if test="${course.price<=0}">
-                                <a class="book-course" class="course-card">
-                                    <p>You have joined the course</p>
-                                </a>
-                            </c:if>
-                            
-                        </c:if>
-
-                       
-                    </div>
+                    <c:if test="${sessionScope.account != null  && billStatus == 2}">
+                        <p class="msg-yellow">Waiting for payment</p> 
+                    </c:if>
                 </div>
             </div>
 
@@ -549,7 +707,7 @@
                                         <i class=""></i>
                                     </div>
                                 </div>
-                                    <a class="text-ellipsis">${c.title}</a><!--replace title for surgest card-->
+                                <a class="text-ellipsis">${c.title}</a><!--replace title for surgest card-->
                             </div>
                             <div class="surgest-card-footer">
                                 <p class="surgest-card-price"><c:if test="${c.price>0}">$${c.price}</c:if><c:if test="${c.price<=0}">Free</c:if></p>
@@ -561,177 +719,331 @@
                 </div>
             </div>
         </div>
-        <%@include file="../Component/toast.jsp" %>       
-    </script>
-    <script>
-        var dateSelect = [];
-        var date = new Date();
-        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap5',
-            format: 'yyyy-mm-dd',
-            minDate: today,
-            disableDates: function (date) {
-                const dayOfWeek = date.getDay();
-                return dateSelect.includes(dayOfWeek);
-            }
-        });
+        <div class="rating-box-wrapper">
+            <form action="course-detail" method="post" class="rating-box">
+                <i class="fa-regular fa-circle-xmark rating-close"></i>
+                <p class="rating-title">how was your experience?</p>
+                <div class="rating-star">
+                    <i class="fas-sharp fa-solid fa-star"></i>
+                    <i class="fas-sharp fa-solid fa-star"></i>
+                    <i class="fas-sharp fa-solid fa-star"></i>
+                    <i class="fas-sharp fa-solid fa-star"></i>
+                    <i class="fas-sharp fa-solid fa-star"></i>
+                </div>
+                <input id="starPoint" type="hidden" name="star" value="0"/>
+                <div class="rating-note"></div>
+                <textarea required name="feedback" class="rating-feedback" placeholder="Describe your experience.."></textarea>
+                <button>POST</button>
+            </form>
+        </div>
+        <%@include file="../Component/toast.jsp" %> 
+        <script defer>
+            <c:if test="${checkDup != null}">
+            toast({
+                title: "Opps!",
+                msg: "${checkDup}",
+                type: 'warning',
+                duration: 7000
+            });
+            </c:if>
+            <% 
+            request.removeAttribute("checkDup");
+            %>
+            /*rating stars*/
+            const ratingStarList = $('.rating-star i');
+            const ratingFeedback = document.querySelector('.rating-feedback');
 
-        document.getElementById("datepicker").required = true;
-    </script>
-    <script defer>
-        /*display star*/
-        const starsParents = document.querySelectorAll(".stars");
-        starsParents.forEach(sp => {
-            let stars = sp.querySelectorAll(".stars i");
-            var avg = $(sp).data('avg');
-            stars.forEach(star => {
-                if (avg > 0) {
-                    star.classList.add("fa-solid");
-                    if (avg < 1) {
-                        star.classList.add("fa-star-half-stroke");
+            $('.rating-feedback').keyup(function (e) {
+                $(this).css('height', '59px');
+                let scHeight = e.target.scrollHeight;
+                $(this).css('height', scHeight + 'px');
+            });
+            var ratingList = $('.rating-star i');
+            let valueStar = 0;
+            ratingList.each(function () {
+                $(this).click(function () {
+                    for (let i = 0; i < ratingList.length; i++) {
+                        if (i <= $(this).index()) {
+                            $(ratingList[i]).addClass('star-light');
+                        } else {
+                            $(ratingList[i]).removeClass('star-light');
+                        }
+                    }
+                    let text = "";
+                    valueStar = $(this).index();
+                    switch (valueStar) {
+                        case 0:
+                        {
+                            text = 'I just hate it <i class="fa-solid fa-face-angry"></i>';
+                            break;
+                        }
+                        case 1:
+                        {
+                            text = "I don't like it <i class='fa-solid fa-face-frown'></i>";
+                            break;
+                        }
+                        case 2:
+                        {
+                            text = 'It ok <i class="fa-solid fa-face-smile"></i>';
+                            break;
+                        }
+                        case 3:
+                        {
+                            text = 'It is awesome <i class="fa-solid fa-face-laugh-beam"></i>';
+                            break;
+                        }
+                        case 4:
+                        {
+                            text = 'I just love it <i class="fa-solid fa-face-laugh-squint"></i>';
+                            break;
+                        }
+                    }
+                    $('.rating-note').html(text);
+                    $('#starPoint').val(valueStar + 1);
+                });
+            });
+            /*validate and post form rating*/
+            <c:if test="${allowRating}">
+            $('.rating-box').on("submit", function (e) {
+                e.preventDefault();
+                if ($('#starPoint').val() === '0') {
+                    toast({
+                        title: "Opps!",
+                        msg: 'Please rate us by click on star <i class="fa-solid fa-face-laugh-squint"></i>!',
+                        type: 'warning',
+                        duration: 5000
+                    });
+                } else if ($('.rating-feedback').val().length > 50) {
+                    toast({
+                        title: "Opps!",
+                        msg: "Your feedback too long, please lest than 50 charactors!",
+                        type: 'warning',
+                        duration: 5000
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: $(this).attr('action'),
+                        data: "action=rating&courseid=${course.id}&" + $(this).serialize(),
+                        success: function (data) {
+                            let rateUi = '<div class="user-feedback-item">' +
+                                    '<div class="user-feedback-avata img-square-container">' +
+                                    '<img src="${pageContext.request.contextPath}/Asset/img/avatar/${sessionScope.account.img}" alt="avatar.img">' +
+                                    '</div>' +
+                                    '<div class="feedback-info">' +
+                                    '<div>' +
+                                    '<h4 class="user-feedback-name">${sessionScope.account.name}</h4>' +
+                                    '<div data-avg="' + (valueStar + 1) + '" class="yellow-stars stars">' +
+                                    '<i class=""></i>' +
+                                    '<i class=""></i>' +
+                                    '<i class=""></i>' +
+                                    '<i class=""></i>' +
+                                    '<i class=""></i>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<p class="user-feedback-content text">' + $('.rating-feedback').val() + '</p>' +
+                                    '</div>' +
+                                    '</div>';
+                            $('.load-feedback').append(rateUi);
+                            displayStars();
+                            toast({
+                                title: "Success!",
+                                msg: "Thanks for your feedback!",
+                                type: 'success',
+                                duration: 5000
+                            });
+                            $('.feedback-btn-open').hide();
+                        },
+                        error: function (msg) {
+
+                        }
+                    });
+                    $('.rating-box-wrapper').hide();
+                }
+            });
+            /*close form*/
+            $('.rating-close').click(function () {
+                $('.rating-box-wrapper').hide();
+            });
+            /*open form*/
+            $('.feedback-btn-open').click(function () {
+                $('.rating-box-wrapper').css('display', 'flex');
+            });
+            </c:if>
+        </script>
+        <script>
+            var dateSelect = [];
+            var date = new Date();
+            var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+            $('#datepicker').datepicker({
+                uiLibrary: 'bootstrap5',
+                format: 'yyyy-mm-dd',
+                minDate: today,
+                disableDates: function (date) {
+                    const dayOfWeek = date.getDay();
+                    return dateSelect.includes(dayOfWeek);
+                }
+            });
+
+            document.getElementById("datepicker").required = true;
+        </script>
+        <script defer>
+            /*display star*/
+            displayStars();
+            function displayStars() {
+                const starsParents = document.querySelectorAll(".stars");
+                starsParents.forEach(sp => {
+                    let stars = sp.querySelectorAll(".stars i");
+                    var avg = $(sp).data('avg');
+                    stars.forEach(star => {
+                        if (avg > 0) {
+                            star.classList.add("fa-solid");
+                            if (avg < 1) {
+                                star.classList.add("fa-star-half-stroke");
+                            } else {
+                                star.classList.add("fa-star");
+                            }
+                        } else {
+                            star.classList.add("fa-regular");
+                            star.classList.add("fa-star");
+                        }
+                        avg -= 1;
+                    });
+                });
+            }
+            /*display date text*/
+            const displayDate = document.querySelector(".jsdate");
+            const displayTime = document.querySelector(".jstime");
+            var dateData = "";
+            var timeData = "";
+            <c:forEach items="${courseScheduleList}" var="i">
+            dateData += "<option data-cId='${i.dateOfWeek}' value='${i.id}' > ${i.dateToString()} </option>";
+            timeData += "<li class='time-${i.id}' > ${i.startTime} - ${i.endTime}</li>";
+            </c:forEach>
+            displayDate.innerHTML = dateData;
+            displayTime.innerHTML = timeData;
+            loadTime($('.jsdate'));
+            function loadTime(select) {
+                var id = $(select).val();
+                var datePick = $('.jsdate').find(':selected').attr('data-cId');
+                var parseDate = datePick.split(",");
+                dateSelect = [];
+                parseDate.forEach(i => {
+                    var j = parseInt(i);
+                    if (j < 6) {
+                        j = j + 1;
                     } else {
-                        star.classList.add("fa-star");
+                        j = 0;
                     }
-                } else {
-                    star.classList.add("fa-regular");
-                    star.classList.add("fa-star");
-                }
-                avg -= 1;
-            });
-        });
-        /*display date text*/
-        const displayDate = document.querySelector(".jsdate");
-        const displayTime = document.querySelector(".jstime");
-        var dateData = "";
-        var timeData = "";
-        <c:forEach items="${courseScheduleList}" var="i">
-        dateData += "<option data-cId='${i.dateOfWeek}' value='${i.id}' > ${i.dateToString()} </option>";
-        timeData += "<li class='time-${i.id}' > ${i.startTime} - ${i.endTime}</li>";
-        </c:forEach>
-        displayDate.innerHTML = dateData;
-        displayTime.innerHTML = timeData;
-        loadTime($('.jsdate'));
-        function loadTime(select) {
-            var id = $(select).val();
-            var datePick = $('.jsdate').find(':selected').attr('data-cId');
-            var parseDate = datePick.split(",");
-            dateSelect = [];
-            parseDate.forEach(i => {
-                var j = parseInt(i);
-                if (j < 6) {
-                    j = j + 1;
-                } else {
-                    j = 0;
-                }
-                dateSelect.push(j);
-            });
+                    dateSelect.push(j);
+                });
 
-            console.log(dateSelect);
-            $('.right-container li.time-' + id).show();
-            $('.right-container li.time-' + id).siblings().hide();
-        }
-        function goto(url) {
-            window.location.href = "${pageContext.request.contextPath}/" + url;
-        }
-
-        function gotoCheckout(url) {
-            var course_scheduleId = $('#dateSD').val();
-            var duration = $('#duration').val();
-            var start_Time = $('#datepicker').val();
-
-            if (!start_Time) {
-                $('#date-error-message').text('Please choose a start date !!!');
-                $('#date-error-message').css('color', 'red');
-                $('#date-error-message').show();
-
-                setTimeout(function () {
-                    $('#date-error-message').hide();
-                }, 5000);
-
-                return;
+                console.log(dateSelect);
+                $('.right-container li.time-' + id).show();
+                $('.right-container li.time-' + id).siblings().hide();
+            }
+            function goto(url) {
+                window.location.href = "${pageContext.request.contextPath}/" + url;
             }
 
-            // Các mã khác trong hàm gotoCheckout...
+            function gotoCheckout(url) {
+                var course_scheduleId = $('#dateSD').val();
+                var duration = $('#duration').val();
+                var start_Time = $('#datepicker').val();
 
-            // Xóa thông báo nếu đã chọn ngày
-            $('#date-error-message').text('');
-            $('#date-error-message').hide();
+                if (!start_Time) {
+                    $('#date-error-message').text('Please choose a start date !!!');
+                    $('#date-error-message').css('color', 'red');
+                    $('#date-error-message').show();
 
-            window.location.href = "${pageContext.request.contextPath}/" + url + "&course_scheduleId=" + course_scheduleId + "&duration=" + duration + "&start_time=" + start_Time;
-        }
+                    setTimeout(function () {
+                        $('#date-error-message').hide();
+                    }, 5000);
+
+                    return;
+                }
+
+                // Các mã khác trong hàm gotoCheckout...
+
+                // Xóa thông báo nếu đã chọn ngày
+                $('#date-error-message').text('');
+                $('#date-error-message').hide();
+
+                window.location.href = "${pageContext.request.contextPath}/" + url + "&course_scheduleId=" + course_scheduleId + "&duration=" + duration + "&start_time=" + start_Time;
+            }
 
 
 
-        $('.jsWishlist').click(() => {
-            if ($('.jsWishlist').hasClass('added')) {
-                $.ajax({
-                    url: "course-detail?courseid=" +${course.id} + "&action=remove",
-                    type: "post",
-                    success: function (data) {
-                        if (data == "account-failed") {
+            $('.jsWishlist').click(() => {
+                if ($('.jsWishlist').hasClass('added')) {
+                    $.ajax({
+                        url: "course-detail?courseid=" +${course.id} + "&action=remove",
+                        type: "post",
+                        success: function (data) {
+                            if (data == "account-failed") {
+                                toast({
+                                    title: "Opps!",
+                                    msg: "Login to use this fuction!",
+                                    type: 'error',
+                                    duration: 5000
+                                });
+                            } else {
+                                toast({
+                                    title: "Success!",
+                                    msg: "Remove success!",
+                                    type: 'success',
+                                    duration: 5000
+                                });
+                                $('.jsWishlist').removeClass('added');
+                                $('.jsWishlist').html('<i class="fa-regular fa-bookmark"></i> Add To WishList');
+                            }
+                        },
+                        error: function (msg) {
                             toast({
                                 title: "Opps!",
                                 msg: "Login to use this fuction!",
                                 type: 'error',
                                 duration: 5000
                             });
-                        } else {
-                            toast({
-                                title: "Success!",
-                                msg: "Remove success!",
-                                type: 'success',
-                                duration: 5000
-                            });
-                            $('.jsWishlist').removeClass('added');
-                            $('.jsWishlist').html('<i class="fa-regular fa-bookmark"></i> Add To WishList');
                         }
-                    },
-                    error: function (msg) {
-                        toast({
-                            title: "Opps!",
-                            msg: "Login to use this fuction!",
-                            type: 'error',
-                            duration: 5000
-                        });
-                    }
-                });
-            } else {
+                    });
+                } else {
 
-                $.ajax({
-                    url: "course-detail?courseid=" +${course.id} + "&action=add",
-                    type: "post",
-                    success: function (data) {
-                        if (data == "account-failed") {
+                    $.ajax({
+                        url: "course-detail?courseid=" +${course.id} + "&action=add",
+                        type: "post",
+                        success: function (data) {
+                            if (data == "account-failed") {
+                                toast({
+                                    title: "Opps!",
+                                    msg: "Login to use this fuction!",
+                                    type: 'error',
+                                    duration: 5000
+                                });
+                            } else {
+                                $('.jsWishlist').addClass('added');
+                                $('.jsWishlist').html('<i class="fa fa-times" aria-hidden="true"></i> Remove From WishList');
+                                toast({
+                                    title: "Success!",
+                                    msg: "Add success!",
+                                    type: 'success',
+                                    duration: 5000
+                                });
+                            }
+                        },
+                        error: function (msg) {
                             toast({
                                 title: "Opps!",
-                                msg: "Login to use this fuction!",
+                                msg: "Login to add wishlist!",
                                 type: 'error',
                                 duration: 5000
                             });
-                        } else {
-                            $('.jsWishlist').addClass('added');
-                            $('.jsWishlist').html('<i class="fa fa-times" aria-hidden="true"></i> Remove From WishList');
-                            toast({
-                                title: "Success!",
-                                msg: "Add success!",
-                                type: 'success',
-                                duration: 5000
-                            });
                         }
-                    },
-                    error: function (msg) {
-                        toast({
-                            title: "Opps!",
-                            msg: "Login to add wishlist!",
-                            type: 'error',
-                            duration: 5000
-                        });
-                    }
-                });
-            }
-        });
-    </script>
-    <%@include file="../Component/footer.jsp" %> 
-</body>
+                    });
+                }
+            });
+        </script>
+        <%@include file="../Component/footer.jsp" %> 
+    </body>
 </html>

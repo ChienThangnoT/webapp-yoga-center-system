@@ -24,10 +24,11 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <!-- Link CSS  -->
-        <link rel="stylesheet" href="../Asset/css/dashboard_2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Asset/css/dashboard_2.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/Asset/css/alertBoxAdmin.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
-        <script src="../js/cdnjs.cloudflare.com_ajax_libs_Chart.js_2.4.0_Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@1/dist/tinymce-jquery.min.js"></script>
+        <script src="https://cdn.tiny.cloud/1/d0pdth25h6ucisyj1a2xqwiqamcmwz0so59g11ehrng09e2y/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     </head>
     <body>
 
@@ -38,47 +39,64 @@
                         <button id="menu-btn">
                             <span class="material-symbols-sharp">menu</span>
                         </button>
-                        <form action="" id="search-box">
-                            <input type="text" id="search-text" placeholder="Search anything you want" required>
-                            <button id="btnSearch"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </form>
                         <div class="profile">
                             <div class="info">
-                                <p>Hey, <b>Admin</b></p>
-                                <small class="text-muted">Admin</small>
-                            </div>
-                            <div class="profile-photo">
-                                <img src="../Asset/img/avatar/hinh-avatar-1.png" alt="">
-                            </div>
+                                <p>Hey, <b>${sessionScope.account.name}</b></p>
+                            <small class="text-muted">Admin</small>
+                        </div>
+                        <div class="profile-photo">
+                            <img src="../Asset/img/avatar/${sessionScope.account.img}" alt="">
                         </div>
                     </div>
-                    <h1>Add Course</h1>
-                    <div id="wrapper">
-                        <form action="../admin/addCourseController" method="post" enctype="multipart/form-data">
-                            <h3>Add Course</h3>
+                </div>
+                <h1>Add Course</h1>
+                <div id="wrapper">
+                    <form id="formA" action="../admin/addCourseController" method="post" enctype="multipart/form-data">
+                        <h3>Add Course</h3>
 
-                            <div class="input__group">
-                                <input type="text" name="txtTitle" required>
-                                <label for="">Title</label>
+                        <div class="input__group">
+                            <input type="text" name="txtTitle" required>
+                            <label for="">Title</label>
+                        </div>
+                        <c:if test="${ADD_COURSE_ERROR.courseTitleLengthError != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.courseTitleLengthError}
                             </div>
-
-                            <div class="input__group detail">
-                                <textarea name="txtDetail" id="detail" rows="5" required></textarea>
-                                <label for="">Details</label>
+                        </c:if>
+                        <c:if test="${ADD_COURSE_ERROR.courseTitleDuplicateError != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.courseTitleDuplicateError}
                             </div>
-
-                            <div class="input__group">
-                                <input type="text" name="txtDuration" required>
-                                <label for="">Duration</label>
+                        </c:if>
+                        <p>Details</p>
+                        <div class="input__group detail">
+                            <textarea id="textEditor" id="detail" rows="5"></textarea>
+                            <input name="txtDetail" type="hidden" id="detail">
+                        </div>
+                        <c:if test="${ADD_COURSE_ERROR.courseDetailLengthError != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.courseDetailLengthError}
                             </div>
-
-                            <div class="input__group image">
-                                <input type="file" name="courseImg" accept=".png, .jpg" onchange="loadFile(this)">
-                                <img src="" alt="" id="output">
+                        </c:if>
+                        <div class="input__group">
+                            <input type="text" name="txtDuration" required>
+                            <label for="">Duration</label>
+                        </div>
+                        <c:if test="${ADD_COURSE_ERROR.courseDurationError != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.courseDurationError}
                             </div>
-
-                            <div class="input__group filter">
-                                <select class="input-filter" name="categoyList" id="categoy">
+                        </c:if>
+                        <div class="input__group image">
+                            <input type="file" name="courseImg" accept=".png, .jpg" onchange="loadFile(this)">
+                            <img src="" alt="" id="output">
+                        </div>
+                        <div class="input__group filter">
+                            <select class="input-filter" name="categoyList" id="categoy">
                                 <c:forEach items="${CATEGORY_ADD_OPTIONS}" var="categoryList">
                                     <c:if test="${categoryList.isActive == true }">
                                         <option value="${categoryList.id}"> ${categoryList.name} </option>                              
@@ -87,13 +105,12 @@
                             </select>
                             <label for="">Category</label>
                         </div>
-
                         <div class="input__group filter">
                             <select class="input-filter" name="accountList" id="account">
                                 <c:forEach items="${ACCOUNT_ADD_OPTIONS}" var="accountList">
                                     <c:if test="${accountList.isActive == true }">
                                         <c:if test="${accountList.role.id == 2}">
-                                        <option value="${accountList.id}"> ${accountList.name} </option>  
+                                            <option value="${accountList.id}"> ${accountList.name} </option>  
                                         </c:if>
                                     </c:if>
                                 </c:forEach>
@@ -103,7 +120,19 @@
                         <div class="input__group">
                             <input type="text" name="txtPrice" required>
                             <label for="">Price</label>
-                        </div>
+                        </div>     
+                        <c:if test="${ADD_COURSE_ERROR.coursePriceError != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.coursePriceError}
+                            </div>
+                        </c:if>
+                        <c:if test="${ADD_COURSE_ERROR.error != null}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times;</span> 
+                                <strong>Warning!</strong> ${ADD_COURSE_ERROR.error}
+                            </div>
+                        </c:if>   
                         <div class="input__button">
                             <button type="submit" value="Add" id="btn__Add">Add</button>
                             <button type="reset" value="Reset" id="btn__Reset">Refresh</button>
@@ -113,13 +142,21 @@
             </main>
         </div>
         <script>
-            var sidebarElements = document.querySelectorAll(".sidebar-elements");
-            sidebarElements.forEach(btn => {
-                $(btn).click(function () {
-                    $(this).children(".sub-item").slideToggle(300);
-                });
+            
+            tinymce.init({
+                selector: '#textEditor',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    {value: 'First.Name', title: 'First Name'},
+                    {value: 'Email', title: 'Email'}
+                ]
             });
-
+            $('#formA').on('submit',function(e){
+                $('#detail').val(tinymce.activeEditor.getContent());
+            });
             var loadFile = function (event) {
                 let reader = new FileReader();
                 reader.readAsDataURL(event.files[0]);
@@ -128,6 +165,18 @@
                 };
                 console.log(event.files[0].name);
             };
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function () {
+                        div.style.display = "none";
+                    }, 600);
+                };
+            }
         </script>
     </body>
 </html>

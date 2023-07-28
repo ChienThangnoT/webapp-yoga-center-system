@@ -58,16 +58,30 @@
                                 <tr>
                                     <th>Payment method:</td>
                                         <c:if test="${sessionScope.billCourseC != null}">
-                                            <td>${sessionScope.billCourseC.method}</td>
+                                            <td>${sessionScope.billCourseC.paymentMethod}</td>
+                                        </c:if>
+                                        <c:if test="${sessionScope.bill != null}">
+                                            <td>${sessionScope.bill.paymentMethod}</td>
                                         </c:if>
                                 </tr>
                                 <tr>
                                     <th>Order code:</th>
-                                    <td>${PAYMENT.vnp_TxnRef}</td>
+                                        <c:if test="${sessionScope.billCourseC != null}">
+                                            <td>${PAYMENT.vnp_TxnRef}</td>
+                                        </c:if>
+                                        <c:if test="${sessionScope.bill != null}">
+                                            <td>${sessionScope.bill.orderCode}</td>
+                                        </c:if>
                                 </tr>
                                 <tr>
                                     <th>Amount paid:</th>
-                                    <td class="amout">$${sessionScope.billCourseC.value}</td>
+                                        <c:if test="${sessionScope.billCourseC != null}">
+                                            <td class="amout">$${sessionScope.billCourseC.value}</td>
+                                        </c:if>
+                                        <c:if test="${sessionScope.bill != null}">
+                                            <td class="amout">${sessionScope.bill.value}</td>
+                                        </c:if>
+                                    
                                 </tr>
 
                             </tbody>
@@ -81,28 +95,41 @@
                     <div class="col-md-12 payment-details">
                         <table>
                             <tbody>
+                                
                                 <tr>
                                     <th>Payment product:</th>
                                         <c:if test="${sessionScope.billCourseC.course != null}">
-                                        <td>${sessionScope.billCourseC.course.title}</td>
-                                    </c:if>
-                                </tr>
-                                <tr>
-                                    <th>Bank Transaction Number:</td>
-                                    <td>${PAYMENT.vnp_BankTranNo}</td>
-                                </tr>
-                                <tr>
-                                    <th>Bank code:</td>
-                                    <td>${PAYMENT.vnp_BankCode}</td>
-                                </tr>
-                                <tr>
-                                    <th>Payment type:</td>
-                                    <td>${PAYMENT.vnp_CardType}</td>
-                                </tr>
-                                <tr>
-                                    <th>Payment date:</td>
-                                    <td>${sessionScope.billCourseC.paymentDate}</td>
-                                </tr>
+                                            <td>${sessionScope.billCourseC.course.title}</td>
+                                        </c:if>
+                                        <c:if test="${sessionScope.bill != null}">
+                                            <td class="amout">${sessionScope.bill.course.title}</td>
+                                        </c:if>
+                                    </tr>
+                                    <c:if test="${sessionScope.billCourseC != null}">
+                                        <tr>
+                                            <th>Bank Transaction Number:</td>
+                                            <td>${PAYMENT.vnp_BankTranNo}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank code:</td>
+                                            <td>${PAYMENT.vnp_BankCode}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Payment type:</td>
+                                            <td>${PAYMENT.vnp_CardType}</td>
+                                        </tr>
+                                        
+                                        </c:if>
+                                        <tr>
+                                            <th>Payment date:</td>
+
+                                            <c:if test="${sessionScope.billCourseC.course != null}">
+                                                <td>${sessionScope.billCourseC.paymentDate}</td>
+                                            </c:if>
+                                            <c:if test="${sessionScope.bill != null}">
+                                                <td class="amout">${sessionScope.bill.date}</td>
+                                            </c:if>
+                                        </tr>
                             </tbody>
                         </table>
                         <div class="thanks">
@@ -111,7 +138,7 @@
                         </div>
                         <div class="payment-footer">
                             <div>Go to Home page after <span id="counter">30</span>s</div>
-                            <p>Powered by <a href="#">VNPAY</a></p>
+                            <p>Powered by <a href="https://vnpay.vn/">VNPAY</a></p>
                         </div>
                     </div>
                 </div>
@@ -119,6 +146,7 @@
         </div>
         <% 
             session.removeAttribute("billCourse");
+            session.removeAttribute("billCourseC");
             session.removeAttribute("PAYMENT");
             session.removeAttribute("RegistrationMembership");
             session.removeAttribute("bill");

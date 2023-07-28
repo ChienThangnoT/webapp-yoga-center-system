@@ -45,6 +45,9 @@
     aside h3 {
         font-weight: 500;
     }
+    .sidebar-elements{
+        cursor: pointer;
+    }
 
     aside .sidebar .sidebar-elements a{
         display: flex;
@@ -91,8 +94,12 @@
         padding-left: 2.7rem;
         display: none;
         transition: max-height 300ms ease;
-        overflow: hidden; 
+        background: #848bc80d;
+        border-left: 3px solid #7380ec5c;
+        overflow: hidden;
     }
+
+    
 
 </style>
 <aside>
@@ -108,12 +115,6 @@
     </div>
     <div class="sidebar">
         <div class="sidebar-elements">
-            <a href="${pageContext.request.contextPath}/home">
-                <span class="material-symbols-sharp"> home</span>
-                <h3>Home</h3>
-            </a>
-        </div>
-        <div class="sidebar-elements">
             <a href="${pageContext.request.contextPath}/admin/dashboard" class="js-dashboard">
                 <span class="material-symbols-sharp">grid_view </span>
                 <h3>Dashboard</h3>
@@ -127,16 +128,16 @@
             <ul class="sub-item" id="subItem">
                 <li><a href="<c:url value="/admin/categoryListController"/>">
                         View & Edit Category Course</a></li>
-                <li><a href="../Admin/AddCategory.jsp">
+                <li><a href="<c:url value="/admin/addCategoryController"/>">
                         Add Category Course</a></li>
                 <li><a href="<c:url value="/admin/viewCourseListController"/>">
                         View & Edit Course</a></li>
                 <li><a href="<c:url value="/admin/addCourseController"/>">
                         Add New Course</a></li>
                 <li><a href="<c:url value="/admin/viewCourseTimeListController"/>">
-                        View & Edit Course Time</a></li>
+                        View & Edit Course Schedule</a></li>
                 <li><a href="<c:url value="/admin/addCourseScheduleController"/>">
-                        Add Course Time</a></li>
+                        Add Course Schedule</a></li>
             </ul>
         </div>
         <div class="sidebar-elements">
@@ -145,9 +146,12 @@
                 <h3>Bill</h3>
             </a>
             <ul class="sub-item" id="subItem">
-                <li><a href="#">Bill Analysis</a></li>
+                <li><a href="<c:url value="/admin/billAnalysisController"/>">
+                        Bill Analysis</a></li>
                 <li><a href="<c:url value="/admin/viewBillListController"/>">
-                        View Bill Details</a></li>
+                        View Bill Course Details</a></li>
+                <li><a href="<c:url value="/admin/viewBillMembershipListController"/>">
+                        View Bill Membership Details</a></li>
             </ul>
         </div>
         <div class="sidebar-elements">
@@ -156,7 +160,10 @@
                 <h3>Blog</h3>
             </a>
             <ul class="sub-item" id="subItem">
-                <li><a href="#">Blog Analysis</a></li>
+                <li><a href="<c:url value="/admin/blogAnalysisController"/>">
+                        Blog Analysis</a></li>
+                <li><a href="<c:url value="/admin/blog-approval"/>">
+                        Blog Approval</a></li>
             </ul>
         </div>
         <div class="sidebar-elements">
@@ -165,10 +172,10 @@
                 <h3>Account</h3>
             </a>
             <ul class="sub-item" id="subItem">
-                <li><a href="#">Account Analysis</a></li>
                 <li><a href="<c:url value="/admin/viewAccountListController"/>">
                         View & Edit Account</a></li>
-                <li><a href="../Admin/AddAccount.jsp">Add New Account</a></li>
+                <li><a href="<c:url value="/admin/addAccountController"/>">
+                        Add New Account</a></li>
             </ul>
         </div>
         <div class="sidebar-elements">
@@ -191,7 +198,7 @@
             <ul class="sub-item" id="subItem">
                 <li><a href="<c:url value="/admin/viewMembershipListController"/>">
                         View & Edit Membership</a></li>
-                <li><a href="../Admin/AddMembership.jsp">
+                <li><a href="<c:url value="/admin/addMembershipController"/>">
                         Add Membership</a></li>
             </ul>
         </div>
@@ -208,7 +215,11 @@
     sidebarElements.forEach(btn => {
         $(btn).click(function () {
             $(this).children(".sub-item").slideToggle(300);
+            $(this).siblings().children(".sub-item").slideUp(300);
         });
+    });
+    $('.sub-item').click((e)=>{
+        e.stopPropagation();
     });
     let currentPath = window.location.pathname;
     let currentPathName = currentPath.replace('${pageContext.request.contextPath}', "");
@@ -218,6 +229,8 @@
         case '/admin/viewCourseTimeListController':
         case '/admin/viewCourseListController':
         case '/admin/addCourseController':
+        case '/admin/addCategoryController':
+        case '/admin/updateCourseController':
         {
             $('.js-course').addClass('active');
             break;
@@ -227,23 +240,39 @@
             $('.js-dashboard').addClass('active');
             break;
         }
-        case '/admin/viewBillListController':{
+        case '/admin/viewBillListController':
+        case '/admin/billAnalysisController':
+        case '/admin/viewBillMembershipListController':
+        {
             $('.js-bill').addClass('active');
             break;
         }
-        case '/admin/viewMembershipListController':{
+        case '/admin/viewMembershipListController':
+        case '/admin/addMembershipController':
+        {
             $('.js-membership').addClass('active');
             break;
         }
         case '/admin/viewClassScheduleListController':
-        case '/admin/addClassScheduleController':{
+        case '/admin/addClassScheduleController':
+        {
             $('.js-schedule').addClass('active');
             break;
         }
-        case '/admin/viewAccountListController':{
+        case '/admin/viewAccountListController':
+        case '/admin/addAccountController':
+        {
             $('.js-account').addClass('active');
             break;
         }
-        
+        case '/admin/blogAnalysisController':
+        case '/admin/blog-approval':
+        {
+            $('.js-blog').addClass('active');
+            break;    
+        }
     }
+    var subTab = $('.sidebar-elements a[href="/yoga-center-project'+currentPathName+'"]');
+    subTab.css({'fontWeight':'600','color':'#7380ec'});
+    subTab.parents('.sub-item').show();
 </script>

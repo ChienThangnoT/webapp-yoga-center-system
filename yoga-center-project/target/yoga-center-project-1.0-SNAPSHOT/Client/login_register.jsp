@@ -303,7 +303,7 @@
                             <div class="user-box">
                                 <input class="pass" type="password" name="password" required>
                                 <label>Password</label>
-                                <p class="note-login error" >${errLogin}</p>
+                                <p class="note-login error" style="margin:  3px 0 5px 0">${errLogin}</p>
                         </div>
                         <div class="check">
                             <input onchange="show()" type="checkbox" id="passwordShow" class="show">
@@ -407,7 +407,7 @@
                 } else {
                     pass1.classList.add("input-wrong");
                     pass2.classList.add("input-wrong");
-                    document.querySelector(".note-signup").innerHTML = "passwords don't match!";
+                    document.querySelector(".note-signup").innerHTML = "Passwords don't match!";
                     btn2.disabled = true;
                 }
 

@@ -11,8 +11,11 @@ import java.sql.Date;
  * @author Chien Thang
  */
 public class BillMembership {
-    public static enum BillMemBerStatus{COMPLETED,CANCELLED,PENDING};
-    
+
+    public static enum BillMemBerStatus {
+        COMPLETED, CANCELLED, PENDING
+    };
+
     private Membership membership;
     private Account account;
     private int id;
@@ -21,14 +24,14 @@ public class BillMembership {
     private float value;
     private int discount;
     private Date date;
-    private String ordercode;
-    private String method;
+    private String orderCode;
+    private String paymentMethod;
     private Date paymentDate;
 
     public BillMembership() {
     }
 
-    public BillMembership(Membership membership, Account account, int status, boolean isActive, float value, int discount, Date date, String ordercode, String method, Date paymentDate) {
+    public BillMembership(Membership membership, Account account, int status, boolean isActive, float value, int discount, Date date, String orderCode, String paymentMethod, Date paymentDate) {
         this.membership = membership;
         this.account = account;
         this.status = status;
@@ -36,12 +39,12 @@ public class BillMembership {
         this.value = value;
         this.discount = discount;
         this.date = date;
-        this.ordercode = ordercode;
-        this.method = method;
+        this.orderCode = orderCode;
+        this.paymentMethod = paymentMethod;
         this.paymentDate = paymentDate;
     }
-    
-    public BillMembership(Membership membership, Account account, int status, boolean isActive, float value, int discount, Date date, String ordercode, String method) {
+
+    public BillMembership(Membership membership, Account account, int status, boolean isActive, float value, int discount, Date date, String orderCode, String paymentMethod) {
         this.membership = membership;
         this.account = account;
         this.status = status;
@@ -49,8 +52,8 @@ public class BillMembership {
         this.value = value;
         this.discount = discount;
         this.date = date;
-        this.ordercode = ordercode;
-        this.method = method;
+        this.orderCode = orderCode;
+        this.paymentMethod = paymentMethod;
     }
 
     /**
@@ -165,32 +168,28 @@ public class BillMembership {
         this.date = date;
     }
 
-    /**
-     * @return the ordercode
-     */
-    public String getOrdercode() {
-        return ordercode;
+
+
+    public String getOrderCode() {
+        return orderCode;
     }
 
     /**
-     * @param ordercode the ordercode to set
+     * @return the orderCode
      */
-    public void setOrdercode(String ordercode) {
-        this.ordercode = ordercode;
+    public void setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
     /**
      * @return the method
      */
-    public String getMethod() {
-        return method;
-    }
-
-    /**
-     * @param method the method to set
-     */
-    public void setMethod(String method) {
-        this.method = method;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     /**
@@ -207,11 +206,18 @@ public class BillMembership {
         this.paymentDate = paymentDate;
     }
 
+    public static BillMemBerStatus getEnumIndex(int i) {
+        BillMemBerStatus[] arr = BillMemBerStatus.values();
+        if (i >= 0 && i < arr.length) {
+            return arr[i];
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
-        return "BillMembership{" + "membership=" + membership + ", account=" + account + ", id=" + id + ", status=" + status + ", isActive=" + isActive + ", value=" + value + ", discount=" + discount + ", date=" + date + ", ordercode=" + ordercode + ", method=" + method + ", paymentDate=" + paymentDate + '}';
+        return "BillMembership{" + "membership=" + membership + ", account=" + account + ", id=" + id + ", status=" + status + ", isActive=" + isActive + ", value=" + value + ", discount=" + discount + ", date=" + date + ", orderCode=" + orderCode + ", method=" + paymentMethod + ", paymentDate=" + paymentDate + '}';
     }
     
-    
-    
 }
+

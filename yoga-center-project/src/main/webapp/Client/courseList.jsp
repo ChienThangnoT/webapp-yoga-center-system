@@ -34,7 +34,7 @@
                 flex-direction: column;
             }
             .banner{
-                padding: 12% 20px 10% 20px;
+                padding: 12% 20px 4% 20px;
                 width: 100%;
                 text-align: center;
                 background: url( Asset/img/bg/page-title-1.png) top center / cover no-repeat;
@@ -42,6 +42,10 @@
             .banner h2{
                 color: #227179;
                 font-size: 3.3vw;
+            }
+            .banner p{
+                color: #547670;
+                font-size: 24px;
             }          
             /*card*/
             .course-list{
@@ -407,6 +411,8 @@
                 border-radius: 24px;
                 max-width: fit-content;
                 margin: 12px auto;
+                row-gap: 16px;
+                flex-wrap: wrap;
             }
             .pagination a{
                 width: 45px;

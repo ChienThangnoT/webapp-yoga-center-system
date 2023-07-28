@@ -15,7 +15,7 @@ body {
 }
 
 .banner{
-    padding: 10% 0;
+    padding: 12% 20px 4% 20px;
     width: 100%;
     max-width: 100%;
     text-align: center;
@@ -23,7 +23,11 @@ body {
 }
 .banner h2{
     color: #227179;
-    font-size: 30px;
+    font-size: 3.3vw;
+}
+.banner p{
+    color: #547670;
+    font-size: 24px;
 }
 
 /* Main Card */
@@ -31,7 +35,7 @@ body {
     text-transform: capitalize;
     transition: all 300ms linear;
     width: 100%;
-    height: 100vh;
+    padding: 30px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,10 +71,9 @@ body {
 }
 
 .box button {
-    width: 140px;
+    width: 160px;
     height: 40px;
-    background: #333;
-    color: #fff;
+    
     border-radius: 15px;
     outline: none;
     border: none;
@@ -79,8 +82,10 @@ body {
     margin-top: 20px;
     position: absolute;
     bottom: 5%;
-    transform: translateX(40%);
+    left: 50%;
+    transform: translateX(-50%);
 }
+
 
 .box button:hover {
     opacity: 0.5;
@@ -115,6 +120,8 @@ body {
     background: rgb(242, 243, 244);
     background: linear-gradient(160deg, rgba(242, 243, 244, 1) 0%, rgba(247, 220, 111, 1) 67%, rgba(244, 208, 63, 1) 100%);
 }
+
+
 
 .box:nth-child(3)::after {
     background: rgb(242, 243, 244);
@@ -187,7 +194,7 @@ body {
     color: #fff;
 }
 .box:hover button{
-    color: #333;
+    color: #040505;
     background: #fff;
 }
 .box:hover::before{

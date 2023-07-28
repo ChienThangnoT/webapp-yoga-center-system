@@ -224,6 +224,54 @@
         <servlet-name>InstructorProfileController</servlet-name>
         <servlet-class>com.yowu.yogacenter.controller.client.InstructorProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileMebership</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.client.UserProfileMebership</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBillCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.ViewBillCashierController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBillCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.UpdateBillCashierController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMembershipCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.ViewMembershipCashierController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateMembershipCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.UpdateMembershipCashierController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBillCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.SearchBillCashierController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BillAnalysisController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.admin.BillAnalysisController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogAnalysisController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.admin.BlogAnalysisController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBillMembershipListController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.admin.ViewBillMembershipListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBillMembershipController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.admin.SearchBillMembershipController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlogApprovalController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.admin.BlogApprovalController</servlet-class>
+    </servlet>
+    <servlet>    
+        <servlet-name>SearchBillMembershipCashierController</servlet-name>
+        <servlet-class>com.yowu.yogacenter.controller.cashier.SearchBillMembershipCashierController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserProfileCourse</servlet-name>
         <url-pattern>/userprofile/course</url-pattern>
@@ -439,6 +487,54 @@
     <servlet-mapping>
         <servlet-name>InstructorProfileController</servlet-name>
         <url-pattern>/instructor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileMebership</servlet-name>
+        <url-pattern>/userprofile/membership</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBillCashierController</servlet-name>
+        <url-pattern>/cashier/viewBillCashierController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBillCashierController</servlet-name>
+        <url-pattern>/cashier/updateBillCashierController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMembershipCashierController</servlet-name>
+        <url-pattern>/cashier/viewMembershipCashierController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateMembershipCashierController</servlet-name>
+        <url-pattern>/cashier/updateMembershipCashierController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBillCashierController</servlet-name>
+        <url-pattern>/cashier/searchBillCashierController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BillAnalysisController</servlet-name>
+        <url-pattern>/admin/billAnalysisController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogAnalysisController</servlet-name>
+        <url-pattern>/admin/blogAnalysisController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBillMembershipListController</servlet-name>
+        <url-pattern>/admin/viewBillMembershipListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBillMembershipController</servlet-name>
+        <url-pattern>/admin/searchBillMembershipController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlogApprovalController</servlet-name>
+        <url-pattern>/admin/blog-approval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBillMembershipCashierController</servlet-name>
+        <url-pattern>/cashier/searchBillMembershipCashierController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

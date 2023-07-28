@@ -34,6 +34,9 @@ public class UserProfileSetting extends HttpServlet {
         if (account.getSocialID() == null) {
             request.setAttribute("notloginwithGg", true);
         }
+        if (account.getPassword() != null) {
+            request.setAttribute("loginwithGg", true);
+        }
         
         System.out.println("login GG ");
         request.getRequestDispatcher(USER_PROFILE_SETTING_PAGE).forward(request, response);
@@ -54,12 +57,23 @@ public class UserProfileSetting extends HttpServlet {
                 String username = request.getParameter("txtUsername");
                 String email = request.getParameter("txtEmail");
                 String phone = request.getParameter("txtPhone");
+                String biography = request.getParameter("txtBiography");
                 account.setName(username);
-                account.setEmail(email);
+                
                 account.setPhone(phone);
-                if(ar.updateGeneral(account)){
-                    out.print(username);
+                account.setBiography(biography);
+                    
+                if((!email.equals(account.getEmail()))&&ar.checkDuplicate(email)){
+                    out.print("ERR: Email is existed!");
+                }else{
+                    account.setEmail(email);
+                    if(ar.updateGeneral(account)){
+                        
+                        out.print(username);
+                    }
+                    
                 }
+                
                 break;
             }
             case "avatar":{

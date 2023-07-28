@@ -56,7 +56,7 @@
                                 <tr>
                                     <th>Payment method:</td>
                                         <c:if test="${sessionScope.billCourseC != null}">
-                                            <td>${sessionScope.billCourseC.method}</td>
+                                            <td>${sessionScope.billCourseC.paymentMethod}</td>
                                         </c:if>
                                 </tr>
                                 <tr>
@@ -95,7 +95,7 @@
                                 </tr>
                                 <tr>
                                     <th>Payment date:</td>
-                                    <td>${sessionScope.billCourseC.paymentDate}</td>
+                                    <td>${sessionScope.billCourseC.date}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -113,6 +113,7 @@
         </div>
         <% 
             session.removeAttribute("billCourse");
+            session.removeAttribute("billCourseC");
             session.removeAttribute("PAYMENT");
             session.removeAttribute("RegistrationMembership");
             session.removeAttribute("bill");
